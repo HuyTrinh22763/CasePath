@@ -52,22 +52,28 @@ export default function AboutPage() {
           <div className="absolute top-[20%] right-[10%] w-[20%] h-[20%] bg-indigo-400/5 rounded-full blur-[80px]" />
         </div>
         
+        {/* Dark Overlay with Animated Gradient */}
+        <div className="absolute inset-0 z-[1] animate-gradient" style={{
+          background: 'linear-gradient(90deg, rgba(15,23,42,0.8) 0%, rgba(30,41,59,0.7) 25%, rgba(11,45,87,0.75) 50%, rgba(30,41,59,0.7) 75%, rgba(15,23,42,0.8) 100%)',
+          backdropFilter: 'blur(1px)'
+        }} />
+        
         <div className="container px-4 md:px-6 relative z-10">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-6xl font-black tracking-tighter text-slate-900 sm:text-7xl lg:text-8xl animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-                  Case<span className="text-secondary drop-shadow-sm">Path</span>
+                <h1 className="text-6xl font-black tracking-tighter text-white sm:text-7xl lg:text-8xl animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 drop-shadow-2xl">
+                  Case<span className="text-cyan-300 drop-shadow-[0_0_30px_rgba(103,232,249,0.5)] animate-pulse">Path</span>
                 </h1>
-                <p className="text-2xl font-semibold text-slate-700 leading-tight max-w-[600px] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+                <p className="text-2xl font-semibold text-white/95 leading-tight max-w-[600px] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                   Strategic Thinking through Real-World Cases — Transforming Analysis into Decisive Action.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-                <Button asChild size="lg" className="h-14 px-8 rounded-full bg-primary text-white hover:bg-primary/90 text-lg font-bold shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+                <Button asChild size="lg" className="h-14 px-8 rounded-full bg-cyan-400 text-slate-900 hover:bg-cyan-300 text-lg font-bold shadow-2xl shadow-cyan-400/40 transition-all hover:scale-105 active:scale-95 active:bg-white">
                   <Link href="#method">Methodology <ArrowRight className="ml-2 h-5 w-5" /></Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="h-14 px-8 rounded-full border-2 border-slate-200 text-slate-900 hover:bg-slate-50 text-lg font-bold transition-all hover:scale-105 active:scale-95">
+                <Button asChild variant="outline" size="lg" className="h-14 px-8 rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/50 text-lg font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)]">
                   <Link href="#faq">FAQ</Link>
                 </Button>
               </div>
