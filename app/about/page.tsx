@@ -44,47 +44,33 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* A) Hero Section with Dynamic Background */}
-      <section className="relative py-20 lg:py-40 overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-teal-400/10 rounded-full blur-[100px]" />
-          <div className="absolute top-[20%] right-[10%] w-[20%] h-[20%] bg-indigo-400/5 rounded-full blur-[80px]" />
-        </div>
-        
-        {/* Dark Overlay with Animated Gradient */}
-        <div className="absolute inset-0 z-[1] animate-gradient" style={{
-          background: 'linear-gradient(90deg, rgba(15,23,42,0.8) 0%, rgba(30,41,59,0.7) 25%, rgba(11,45,87,0.75) 50%, rgba(30,41,59,0.7) 75%, rgba(15,23,42,0.8) 100%)',
-          backdropFilter: 'blur(1px)'
-        }} />
-        
+      <section className="relative py-4 lg:py-6 overflow-hidden" style={{ background: '#FCFDFD' }}>
         <div className="container px-4 md:px-6 relative z-10">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-6xl font-black tracking-tighter text-white sm:text-7xl lg:text-8xl animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 drop-shadow-2xl">
-                  Case<span className="text-cyan-300 drop-shadow-[0_0_30px_rgba(103,232,249,0.5)] animate-pulse">Path</span>
+                <h1 className="text-6xl font-black tracking-tighter sm:text-7xl lg:text-8xl animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200" style={{ color: '#032753' }}>
+                  CasePath
                 </h1>
-                <p className="text-2xl font-semibold text-white/95 leading-tight max-w-[600px] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                <p className="text-2xl font-semibold leading-tight max-w-[600px] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300" style={{ color: '#19304D' }}>
                   Strategic Thinking through Real-World Cases — Transforming Analysis into Decisive Action.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-                <Button asChild size="lg" className="h-14 px-8 rounded-full bg-cyan-400 text-slate-900 hover:bg-cyan-300 text-lg font-bold shadow-2xl shadow-cyan-400/40 transition-all hover:scale-105 active:scale-95 active:bg-white">
+                <Button asChild size="lg" className="h-14 px-8 rounded-full text-lg font-bold shadow-xl transition-all hover:scale-105 active:scale-95" style={{ backgroundColor: '#239E82', color: 'white' }}>
                   <Link href="#method">Methodology <ArrowRight className="ml-2 h-5 w-5" /></Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="h-14 px-8 rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/50 text-lg font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)]">
+                <Button asChild variant="outline" size="lg" className="h-14 px-8 rounded-full text-lg font-bold transition-all hover:scale-105 active:scale-95 shadow-md" style={{ borderColor: '#19304D', borderWidth: '2px', color: '#19304D' }}>
                   <Link href="#faq">FAQ</Link>
                 </Button>
               </div>
             </div>
             <div className="relative aspect-video lg:aspect-square animate-in fade-in zoom-in duration-1000">
-               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-secondary/5 rounded-3xl" />
               <Image
                 src="/assets/about-hero.png"
                 alt="CasePath Strategy Visualization"
                 fill
-                className="object-contain drop-shadow-2xl"
+                className="object-contain"
                 priority
               />
             </div>

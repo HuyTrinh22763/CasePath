@@ -33,8 +33,7 @@ export function Footer() {
       links: [
         { label: "LinkedIn", href: "#", icon: true },
         { label: "Facebook", href: "#", icon: true },
-        { label: "Instagram", href: "#", icon: true },
-        { label: "Threads", href: "#", icon: true },
+        { label: "Instagram", href: "#", icon: true }
       ]
     }
   ]
@@ -53,13 +52,13 @@ export function Footer() {
           {/* Navigation Sections */}
           {footerSections.map((section, idx) => (
             <div key={idx} className="space-y-6">
-              <h4 className="font-bold text-[#5B3A29] text-base">{section.title}</h4>
+              <h4 className="font-bold text-[#19304D] text-base">{section.title}</h4>
               <ul className="space-y-4">
                 {section.links.map((link, lIdx) => (
                   <li key={lIdx}>
                     <Link 
                       href={link.href} 
-                      className="text-[#8C7365] hover:text-[#5B3A29] transition-colors text-sm flex items-center gap-1 group"
+                      className="text-[#19304D] hover:text-[#239E82] transition-colors text-sm flex items-center gap-1 group"
                     >
                       {link.label}
                       {link.icon && (
@@ -75,14 +74,14 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-[#8C7365]">
+          <p className="text-sm text-[#19304D]">
             Copyright © {new Date().getFullYear()} thecasepath.org
           </p>
           <div className="flex items-center gap-8 text-sm">
-            <Link href="#" className="text-[#8C7365] hover:text-[#5B3A29] transition-colors">
+            <Link href="#" className="text-[#19304D] hover:text-[#239E82] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="#" className="text-[#8C7365] hover:text-[#5B3A29] transition-colors">
+            <Link href="#" className="text-[#19304D] hover:text-[#239E82] transition-colors">
               Terms of Use
             </Link>
           </div>

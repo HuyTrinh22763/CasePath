@@ -27,12 +27,13 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 mr-8">
             <Image 
-              src="/assets/Logo.jpg" 
+              src="/assets/newLogo.jpg" 
               alt="CasePath Logo" 
-              width={160} 
-              height={40} 
-              className="h-10 w-auto object-contain"
+              width={50} 
+              height={50} 
+              className="h-7.5 w-auto object-contain"
               priority
+              quality={100}
             />
           </Link>
 

@@ -13,15 +13,15 @@ export default function ContactPage() {
     {
       icon: <Facebook className="h-6 w-6 text-[#1877F2]" />,
       label: "Facebook page",
-      value: "Pathwise Mentorship",
-      url: "#",
+      value: "CasePath",
+      url: "https://www.facebook.com/profile.php?id=61585639323057",
       color: "hover:border-[#1877F2]/30"
     },
     {
       icon: <Facebook className="h-6 w-6 text-[#1877F2]" />,
       label: "Facebook community",
-      value: "Share experiences in the Tech field",
-      url: "#",
+      value: "Vietnamese Professional Network",
+      url: "https://www.facebook.com/groups/672801498954519",
       color: "hover:border-[#1877F2]/30"
     },
     {
@@ -45,10 +45,10 @@ export default function ContactPage() {
       <div className="container max-w-2xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-5xl font-extrabold text-[#5B3A29]">
+          <h1 className="text-5xl font-extrabold text-[#19304D]">
             Connect with us!
           </h1>
-          <p className="text-[#8C7365] text-lg">
+          <p className="text-[#19304D] text-lg">
             Please feel free to reach out to us through the following channels.
           </p>
         </div>
@@ -65,14 +65,14 @@ export default function ContactPage() {
                 {link.icon}
               </div>
               <div className="flex-grow">
-                <p className="text-[#5B3A29] font-medium flex items-center gap-2">
+                <p className="text-[#19304D] font-medium flex items-center gap-2">
                   {link.label}: 
-                  <span className="font-bold text-[#5B3A29] group-hover:text-primary transition-colors">
+                  <span className="font-bold text-[#19304D] group-hover:text-primary transition-colors">
                     {link.value}
                   </span>
                 </p>
               </div>
-              <ExternalLink className="h-4 w-4 text-[#D1C7C1] group-hover:text-primary transition-colors" />
+              <ExternalLink className="h-4 w-4 text-[#19304D] group-hover:text-primary transition-colors" />
             </Link>
           ))}
         </div>

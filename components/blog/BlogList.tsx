@@ -71,13 +71,14 @@ export function BlogList() {
   return (
     <div className="space-y-8">
       {/* Controls Header */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between bg-card p-6 rounded-xl border shadow-sm">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-6 rounded-2xl shadow-sm border" style={{ backgroundColor: '#ffffff', borderColor: '#E0E8EC' }}>
         {/* Search */}
         <div className="relative w-full md:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: '#506783' }} />
           <Input 
             placeholder="Search blogs..." 
             className="pl-10"
+            style={{ borderColor: '#E0E8EC', color: '#19304D' }}
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value)
@@ -88,12 +89,12 @@ export function BlogList() {
 
         {/* Sort */}
         <div className="flex items-center gap-2">
-           <span className="text-sm text-muted-foreground hidden sm:inline">Sort by:</span>
+           <span className="text-sm hidden sm:inline font-medium" style={{ color: '#506783' }}>Sort by:</span>
            <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px]" style={{ borderColor: '#E0E8EC', color: '#19304D' }}>
               <SelectValue placeholder="Sort order" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent position="popper" sideOffset={4} style={{ backgroundColor: '#ffffff', borderColor: '#E0E8EC' }}>
               <SelectItem value="newest">Newest First</SelectItem>
               <SelectItem value="oldest">Oldest First</SelectItem>
             </SelectContent>
@@ -112,7 +113,12 @@ export function BlogList() {
               setSelectedCategory(category)
               setCurrentPage(1)
             }}
-            className="rounded-full"
+            className="rounded-full transition-all"
+            style={
+              selectedCategory === category 
+                ? { backgroundColor: '#19304D', color: 'white' }
+                : { borderColor: '#89A5B8', color: '#506783', backgroundColor: 'transparent' }
+            }
           >
             {category}
           </Button>
@@ -120,7 +126,7 @@ export function BlogList() {
       </div>
 
       {/* Results Count */}
-      <div className="text-sm text-muted-foreground">
+      <div className="text-sm font-medium" style={{ color: '#506783' }}>
         Showing {filteredPosts.length} results
       </div>
 
@@ -132,9 +138,9 @@ export function BlogList() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 bg-muted/30 rounded-lg border border-dashed">
-          <h3 className="text-lg font-semibold">No cases found</h3>
-          <p className="text-muted-foreground">Try adjusting your search or filters.</p>
+        <div className="text-center py-20 rounded-lg border border-dashed" style={{ backgroundColor: '#E0E8EC', borderColor: '#89A5B8' }}>
+          <h3 className="text-lg font-bold" style={{ color: '#19304D' }}>No cases found</h3>
+          <p className="font-medium" style={{ color: '#506783' }}>Try adjusting your search or filters.</p>
         </div>
       )}
 
@@ -147,6 +153,7 @@ export function BlogList() {
                 href="#" 
                 onClick={(e) => { e.preventDefault(); handlePageChange(currentPage - 1) }}
                 className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                style={{ color: '#19304D' }}
               />
             </PaginationItem>
             
@@ -156,6 +163,7 @@ export function BlogList() {
                   href="#"
                   isActive={currentPage === i + 1}
                   onClick={(e) => { e.preventDefault(); handlePageChange(i + 1) }}
+                  style={currentPage === i + 1 ? { backgroundColor: '#19304D', color: 'white', borderColor: '#19304D' } : { color: '#506783' }}
                 >
                   {i + 1}
                 </PaginationLink>
@@ -167,6 +175,7 @@ export function BlogList() {
                 href="#"
                 onClick={(e) => { e.preventDefault(); handlePageChange(currentPage + 1) }}
                 className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                style={{ color: '#19304D' }}
               />
             </PaginationItem>
           </PaginationContent>
