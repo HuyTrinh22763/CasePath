@@ -21,7 +21,7 @@ export function Header() {
   const { user, logout } = useAuth()
 
   return (
-    <header className="w-full bg-background border-b shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-[#FCFDFD]">
       <div className="container max-w-6xl mx-auto px-4 md:px-6">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}

@@ -186,10 +186,10 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-28 max-w-5xl mx-auto">
-             <div className="bg-gradient-to-r from-primary to-indigo-900 p-12 md:p-16 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+             <div className="bg-[linear-gradient(90deg,#155D4C,#239E82,#4CCEB0,#239E82,#155D4C)] bg-[length:200%_auto] animate-gradient p-12 md:p-16 rounded-[4rem] shadow-2xl relative overflow-hidden group">
                 <div className="grid md:grid-cols-3 gap-12 relative z-10 text-center items-center text-white">
                     <div className="space-y-4">
-                      <div className="text-4xl font-black italic tracking-tighter uppercase">Evidence-First</div>
+                      <div className="text-4xl font-black italic tracking-tighter uppercase">Evidence First</div>
                       <p className="text-white/70 text-sm font-bold uppercase tracking-widest">Grounded in raw facts</p>
                     </div>
                     <div className="space-y-4 md:border-x border-white/20 px-8 py-4">

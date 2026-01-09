@@ -52,14 +52,15 @@ export function LoginModal({ children }: LoginModalProps) {
       <DialogContent className="sm:max-w-[420px] p-0 overflow-hidden border-none shadow-2xl bg-white dark:bg-slate-950 z-[101]">
         <div className="p-8 space-y-8">
           {/* Header */}
-          <div className="text-center space-y-2">
-            <h1 className="text-4xl font-extrabold tracking-tight text-primary">
+          {/* Header */}
+          <DialogHeader className="text-center space-y-2">
+            <DialogTitle className="text-4xl font-extrabold tracking-tight text-primary">
               Welcome Back
-            </h1>
-            <p className="text-muted-foreground">
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground">
               Sign in to your CasePath account
-            </p>
-          </div>
+            </DialogDescription>
+          </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-4">
