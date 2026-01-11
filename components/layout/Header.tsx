@@ -3,10 +3,11 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
-import { Menu, X, User, Moon, LogOut, Settings, Layout } from "lucide-react"
+import { Menu, X, User, Moon, Sun, LogOut, Settings, Layout } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/lib/contexts/AuthContext"
 import { LoginModal } from "@/components/auth/LoginModal"
+import { useTheme } from "next-themes"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,22 +20,17 @@ import {
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { user, logout } = useAuth()
+  const { theme, setTheme } = useTheme()
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#FCFDFD]">
+    <header className="sticky top-0 z-50 w-full bg-[#FCFDFD] dark:bg-slate-950/80 dark:backdrop-blur-md transition-colors duration-300">
       <div className="container max-w-6xl mx-auto px-4 md:px-6">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 mr-8">
-            <Image 
-              src="/assets/newLogo.jpg" 
-              alt="CasePath Logo" 
-              width={50} 
-              height={50} 
-              className="h-7.5 w-auto object-contain"
-              priority
-              quality={100}
-            />
+            <span className="text-2xl font-bold tracking-tighter text-[#19304D] dark:text-white">
+              CASE<span className="text-[#239E82] dark:text-teal-400">PATH</span>
+            </span>
           </Link>
 
           {/* Spacer */}
@@ -58,16 +54,32 @@ export function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-              <Moon className="h-5 w-5" />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-muted-foreground hover:text-foreground"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle theme</span>
             </Button>
 
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 border border-border hover:bg-muted active:scale-95 transition-all">
-                    <User className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 border border-border hover:bg-muted active:scale-95 transition-all overflow-hidden p-0">
+                    {user.image ? (
+                      <Image 
+                        src={user.image} 
+                        alt={user.name} 
+                        width={40} 
+                        height={40} 
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <User className="h-5 w-5" />
+                    )}
                     <span className="sr-only">Profile</span>
                   </Button>
                 </DropdownMenuTrigger>
@@ -151,9 +163,14 @@ export function Header() {
               Contact
             </Link>
             <div className="pt-4 border-t flex items-center justify-between">
-               <Button variant="ghost" size="sm" className="gap-2 justify-start">
-                  <Moon className="h-4 w-4" />
-                  Dark Mode
+               <Button 
+                 variant="ghost" 
+                 size="sm" 
+                 className="gap-2 justify-start"
+                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+               >
+                  {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                  {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
                </Button>
                {user ? (
                  <Button 

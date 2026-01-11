@@ -41,14 +41,14 @@ export default function ContactPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#FDFCFB] py-20 px-4">
+    <div className="min-h-screen bg-[#FDFCFB] dark:bg-slate-950 py-20 px-4 transition-colors duration-500">
       <div className="container max-w-2xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-5xl font-extrabold text-[#19304D]">
+          <h1 className="text-5xl font-extrabold text-[#19304D] dark:text-sky-50">
             Connect with us!
           </h1>
-          <p className="text-[#19304D] text-lg">
+          <p className="text-[#19304D] dark:text-slate-300 text-lg">
             Please feel free to reach out to us through the following channels.
           </p>
         </div>
@@ -59,20 +59,20 @@ export default function ContactPage() {
             <Link 
               key={index} 
               href={link.url}
-              className={`flex items-center gap-4 bg-white p-6 rounded-xl shadow-sm border border-transparent transition-all ${link.color} hover:shadow-md group`}
+              className={`flex items-center gap-4 bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-transparent dark:border-slate-800 transition-all ${link.color} hover:shadow-md group`}
             >
               <div className="flex-shrink-0">
                 {link.icon}
               </div>
               <div className="flex-grow">
-                <p className="text-[#19304D] font-medium flex items-center gap-2">
+                <p className="text-[#19304D] dark:text-slate-300 font-medium flex items-center gap-2">
                   {link.label}: 
-                  <span className="font-bold text-[#19304D] group-hover:text-primary transition-colors">
+                  <span className="font-bold text-[#19304D] dark:text-sky-50 group-hover:text-primary dark:group-hover:text-primary transition-colors">
                     {link.value}
                   </span>
                 </p>
               </div>
-              <ExternalLink className="h-4 w-4 text-[#19304D] group-hover:text-primary transition-colors" />
+              <ExternalLink className="h-4 w-4 text-[#19304D] dark:text-slate-400 group-hover:text-primary transition-colors" />
             </Link>
           ))}
         </div>

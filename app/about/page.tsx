@@ -42,25 +42,25 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
       {/* A) Hero Section with Dynamic Background */}
-      <section className="relative py-4 lg:py-6 overflow-hidden" style={{ background: '#FCFDFD' }}>
+      <section className="relative py-4 lg:py-6 overflow-hidden bg-[#FCFDFD] dark:bg-slate-950 transition-colors" style={{ background: undefined }}>
         <div className="container px-4 md:px-6 relative z-10">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-6xl font-black tracking-tighter sm:text-7xl lg:text-8xl animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200" style={{ color: '#032753' }}>
+                <h1 className="text-6xl font-black tracking-tighter sm:text-7xl lg:text-8xl animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 text-[#032753] dark:text-sky-50 transition-colors">
                   CasePath
                 </h1>
-                <p className="text-2xl font-semibold leading-tight max-w-[600px] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300" style={{ color: '#19304D' }}>
+                <p className="text-2xl font-semibold leading-tight max-w-[600px] animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 text-[#19304D] dark:text-slate-300 transition-colors">
                   Strategic Thinking through Real-World Cases — Transforming Analysis into Decisive Action.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-                <Button asChild size="lg" className="h-14 px-8 rounded-full text-lg font-bold shadow-xl transition-all hover:scale-105 active:scale-95" style={{ backgroundColor: '#239E82', color: 'white' }}>
+                <Button asChild size="lg" className="h-14 px-8 rounded-full text-lg font-bold shadow-xl transition-all hover:scale-105 active:scale-95 bg-[#239E82] text-white hover:bg-[#1a7f68] dark:bg-teal-600 dark:hover:bg-teal-500" style={{ backgroundColor: undefined, color: undefined }}>
                   <Link href="#method">Methodology <ArrowRight className="ml-2 h-5 w-5" /></Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="h-14 px-8 rounded-full text-lg font-bold transition-all hover:scale-105 active:scale-95 shadow-md" style={{ borderColor: '#19304D', borderWidth: '2px', color: '#19304D' }}>
+                <Button asChild variant="outline" size="lg" className="h-14 px-8 rounded-full text-lg font-bold transition-all hover:scale-105 active:scale-95 shadow-md border-[#19304D] text-[#19304D] border-2 dark:border-slate-700 dark:text-sky-100 dark:hover:bg-slate-800" style={{ borderColor: undefined, borderWidth: undefined, color: undefined }}>
                   <Link href="#faq">FAQ</Link>
                 </Button>
               </div>
@@ -80,11 +80,11 @@ export default function AboutPage() {
 
       {/* B) "What is CasePath?" with Gradient Background */}
       <section className="py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 -z-10 transition-colors" />
         <div className="container px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center space-y-8 mb-20">
-            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">What is CasePath?</h2>
-            <div className="space-y-6 text-xl text-slate-600 leading-relaxed font-medium">
+            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-sky-50 sm:text-5xl transition-colors">What is CasePath?</h2>
+            <div className="space-y-6 text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium transition-colors">
               <p>
                 CasePath is a dedicated platform that curates and distills complex real-world business and technical scenarios 
                 into actionable, high-impact lessons. We believe true wisdom is forged in the heat of critical decisions, not found in rigid theory.
@@ -118,19 +118,19 @@ export default function AboutPage() {
                 points: ["Concise, hard-hitting conclusions for every case.", "Tactical suggestions on how to apply logic in your daily work."]
               }
             ].map((item, idx) => (
-              <Card key={idx} className="group border-none shadow-xl shadow-slate-200/50 rounded-[2.5rem] overflow-hidden transition-all hover:shadow-2xl hover:-translate-y-2 bg-white">
+              <Card key={idx} className="group border-none shadow-xl shadow-slate-200/50 dark:shadow-none rounded-[2.5rem] overflow-hidden transition-all hover:shadow-2xl hover:-translate-y-2 bg-white dark:bg-slate-900/40 dark:border dark:border-white/5 backdrop-blur-sm">
                 <CardHeader className="p-8 pb-4">
-                  <div className={`w-16 h-16 rounded-2xl ${item.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-16 h-16 rounded-2xl ${item.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform bg-opacity-10 dark:bg-opacity-20`}>
                     {item.icon}
                   </div>
-                  <CardTitle className="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors">{item.title}</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-slate-900 dark:text-sky-100 group-hover:text-primary dark:group-hover:text-teal-400 transition-colors">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="p-8 pt-0">
-                  <ul className="space-y-4 text-slate-600 font-medium">
+                  <ul className="space-y-4 text-slate-600 dark:text-slate-400 font-medium">
                     {item.points.map((p, pIdx) => (
                       <li key={pIdx} className="flex items-start gap-3">
                         <div className="mt-1.5 shrink-0">
-                          <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-secondary dark:bg-teal-500" />
                         </div>
                         <span className="leading-snug">{p}</span>
                       </li>
@@ -144,7 +144,7 @@ export default function AboutPage() {
       </section>
 
       {/* C) "Our Methodology" - Methodology Section */}
-      <section id="method" className="py-32 bg-slate-900 text-white relative overflow-hidden">
+      <section id="method" className="py-32 bg-slate-900 dark:bg-slate-950 text-white relative overflow-hidden transition-colors">
         {/* Modern decorative mesh background */}
         <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
@@ -209,16 +209,16 @@ export default function AboutPage() {
       </section>
 
       {/* D) "Quality Principles" Section with Glassmorphism */}
-      <section className="py-32 bg-white relative overflow-hidden">
+      <section className="py-32 bg-white dark:bg-slate-950 relative overflow-hidden transition-colors">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-50">
-           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-100 rounded-full blur-[100px]" />
-           <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-teal-100 rounded-full blur-[100px]" />
+           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-[100px]" />
+           <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-teal-100 dark:bg-teal-900/20 rounded-full blur-[100px]" />
         </div>
         
         <div className="container px-4 md:px-6 relative z-10">
           <div className="text-center mb-24 space-y-6">
-            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Quality Principles</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto text-xl font-medium">
+            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-sky-50 sm:text-5xl transition-colors">Quality Principles</h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-xl font-medium transition-colors">
               Every piece of content on CasePath adheres to rigid standards to ensure maximum intellectual value.
             </p>
           </div>
@@ -232,11 +232,11 @@ export default function AboutPage() {
               "Top-Down Communication",
               "Actionable Lessons"
             ].map((principle, idx) => (
-              <div key={idx} className="flex items-center gap-6 p-8 bg-white/70 backdrop-blur-md border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-300">
-                 <div className="shrink-0 w-10 h-10 rounded-full bg-secondary flex items-center justify-center shadow-lg shadow-secondary/10">
+              <div key={idx} className="flex items-center gap-6 p-8 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md border border-slate-100 dark:border-slate-800 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-primary/20 dark:hover:border-teal-500/30 transition-all duration-300">
+                 <div className="shrink-0 w-10 h-10 rounded-full bg-secondary dark:bg-teal-600 flex items-center justify-center shadow-lg shadow-secondary/10">
                     <ShieldCheck className="w-6 h-6 text-white" />
                  </div>
-                 <span className="text-xl font-bold text-slate-800">{principle}</span>
+                 <span className="text-xl font-bold text-slate-800 dark:text-slate-200 transition-colors">{principle}</span>
               </div>
             ))}
           </div>
@@ -245,47 +245,47 @@ export default function AboutPage() {
 
       {/* E) "Who is CasePath for?" Section */}
       <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-slate-50 -z-10" />
+        <div className="absolute inset-0 bg-slate-50 dark:bg-slate-900/50 -z-10 transition-colors" />
         <div className="container px-4 md:px-6">
           <div className="text-center mb-24 space-y-6">
-            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Who is CasePath for?</h2>
-            <p className="text-slate-600 max-w-3xl mx-auto text-xl font-medium leading-relaxed">
+            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-sky-50 sm:text-5xl transition-colors">Who is CasePath for?</h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-xl font-medium leading-relaxed transition-colors">
               CasePath is designed for high-performers who want to sharpen their professional intuition.
             </p>
           </div>
 
           <div className="grid gap-12 lg:grid-cols-3">
-             <div className="group p-10 rounded-[3rem] bg-white border border-slate-100 shadow-xl shadow-slate-200/50 space-y-8 hover:-translate-y-3 transition-all duration-500">
-                <div className="w-20 h-20 rounded-[1.5rem] bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-500">
+             <div className="group p-10 rounded-[3rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none space-y-8 hover:-translate-y-3 transition-all duration-500">
+                <div className="w-20 h-20 rounded-[1.5rem] bg-secondary/10 dark:bg-teal-500/10 flex items-center justify-center text-secondary dark:text-teal-400 group-hover:bg-secondary group-hover:text-white dark:group-hover:bg-teal-500 transition-all duration-500">
                   <Users className="w-10 h-10" />
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-bold text-slate-900 leading-tight">Students &<br/>New Grads</h3>
-                  <p className="text-slate-600 text-lg leading-relaxed font-medium">
+                  <h3 className="text-3xl font-bold text-slate-900 dark:text-sky-50 leading-tight transition-colors">Students &<br/>New Grads</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-medium transition-colors">
                     Ambitious individuals aiming for roles in Consulting, Strategy, Finance, or Data Analytics.
                   </p>
                 </div>
              </div>
 
-             <div className="group p-10 rounded-[3rem] bg-white border border-slate-100 shadow-xl shadow-slate-200/50 space-y-8 hover:-translate-y-3 transition-all duration-500">
-                <div className="w-20 h-20 rounded-[1.5rem] bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
+             <div className="group p-10 rounded-[3rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none space-y-8 hover:-translate-y-3 transition-all duration-500">
+                <div className="w-20 h-20 rounded-[1.5rem] bg-primary/10 dark:bg-sky-500/10 flex items-center justify-center text-primary dark:text-sky-400 group-hover:bg-primary group-hover:text-white dark:group-hover:bg-sky-600 transition-all duration-500">
                   <Lightbulb className="w-10 h-10" />
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-bold text-slate-900 leading-tight">Product, Ops & Marketing</h3>
-                  <p className="text-slate-600 text-lg leading-relaxed font-medium">
+                  <h3 className="text-3xl font-bold text-slate-900 dark:text-sky-50 leading-tight transition-colors">Product, Ops & Marketing</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-medium transition-colors">
                     Working professionals looking to elevate their decision-making effectiveness through logic.
                   </p>
                 </div>
              </div>
 
-             <div className="group p-10 rounded-[3rem] bg-white border border-slate-100 shadow-xl shadow-slate-200/50 space-y-8 hover:-translate-y-3 transition-all duration-500">
-                <div className="w-20 h-20 rounded-[1.5rem] bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-500">
+             <div className="group p-10 rounded-[3rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none space-y-8 hover:-translate-y-3 transition-all duration-500">
+                <div className="w-20 h-20 rounded-[1.5rem] bg-secondary/10 dark:bg-teal-500/10 flex items-center justify-center text-secondary dark:text-teal-400 group-hover:bg-secondary group-hover:text-white dark:group-hover:bg-teal-500 transition-all duration-500">
                   <MessageSquare className="w-10 h-10" />
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-bold text-slate-900 leading-tight">Case Interview Candidates</h3>
-                  <p className="text-slate-600 text-lg leading-relaxed font-medium">
+                  <h3 className="text-3xl font-bold text-slate-900 dark:text-sky-50 leading-tight transition-colors">Case Interview Candidates</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-medium transition-colors">
                     Those training for high-stakes interviews who need to master and sharpen their structural logic.
                   </p>
                 </div>
@@ -295,46 +295,46 @@ export default function AboutPage() {
       </section>
 
       {/* F) FAQ Section */}
-      <section id="faq" className="py-32 bg-white">
+      <section id="faq" className="py-32 bg-white dark:bg-slate-950 transition-colors">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto">
           <div className="text-center mb-20 space-y-6">
-            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">FAQ</h2>
-            <p className="text-slate-600 text-xl font-medium">Your most common questions answered.</p>
+            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-sky-50 sm:text-5xl transition-colors">FAQ</h2>
+            <p className="text-slate-600 dark:text-slate-400 text-xl font-medium transition-colors">Your most common questions answered.</p>
           </div>
           <Accordion type="single" collapsible className="w-full space-y-4">
-            <AccordionItem value="item-1" className="border border-slate-100 rounded-3xl px-8 bg-slate-50 data-[state=open]:bg-white data-[state=open]:shadow-lg transition-all">
-              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900">How does CasePath differ from traditional blogs?</AccordionTrigger>
-              <AccordionContent className="text-slate-600 text-lg leading-relaxed pb-8 pt-2 font-medium">
-                CasePath focuses on <span className="text-primary font-bold">process</span> over information. Traditional blogs tell you what happened; CasePath reveals <span className="font-bold underline">why</span> a specific decision was made in a specific context Z, teaching you the underlying business logic.
+            <AccordionItem value="item-1" className="border border-slate-100 dark:border-slate-800 rounded-3xl px-8 bg-slate-50 dark:bg-slate-900 data-[state=open]:bg-white dark:data-[state=open]:bg-slate-800 data-[state=open]:shadow-lg transition-all text-slate-900 dark:text-slate-200">
+              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900 dark:text-sky-50">How does CasePath differ from traditional blogs?</AccordionTrigger>
+              <AccordionContent className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed pb-8 pt-2 font-medium">
+                CasePath focuses on <span className="text-primary dark:text-sky-400 font-bold">process</span> over information. Traditional blogs tell you what happened; CasePath reveals <span className="font-bold underline dark:text-white">why</span> a specific decision was made in a specific context Z, teaching you the underlying business logic.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-2" className="border border-slate-100 rounded-3xl px-8 bg-slate-50 data-[state=open]:bg-white data-[state=open]:shadow-lg transition-all">
-              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900">Is the content strictly framework-based?</AccordionTrigger>
-              <AccordionContent className="text-slate-600 text-lg leading-relaxed pb-8 pt-2 font-medium">
+            <AccordionItem value="item-2" className="border border-slate-100 dark:border-slate-800 rounded-3xl px-8 bg-slate-50 dark:bg-slate-900 data-[state=open]:bg-white dark:data-[state=open]:bg-slate-800 data-[state=open]:shadow-lg transition-all text-slate-900 dark:text-slate-200">
+              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900 dark:text-sky-50">Is the content strictly framework-based?</AccordionTrigger>
+              <AccordionContent className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed pb-8 pt-2 font-medium">
                 We use frameworks as mental bridges, not crutches. Our goal is to train your professional intuition so you can build your own logic for any problem you face, with or without a predefined framework.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-3" className="border border-slate-100 rounded-3xl px-8 bg-slate-50 data-[state=open]:bg-white data-[state=open]:shadow-lg transition-all">
-              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900">What if I don&apos;t have a business background?</AccordionTrigger>
-              <AccordionContent className="text-slate-600 text-lg leading-relaxed pb-8 pt-2 font-medium">
+            <AccordionItem value="item-3" className="border border-slate-100 dark:border-slate-800 rounded-3xl px-8 bg-slate-50 dark:bg-slate-900 data-[state=open]:bg-white dark:data-[state=open]:bg-slate-800 data-[state=open]:shadow-lg transition-all text-slate-900 dark:text-slate-200">
+              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900 dark:text-sky-50">What if I don&apos;t have a business background?</AccordionTrigger>
+              <AccordionContent className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed pb-8 pt-2 font-medium">
                 Structure is universal. Whether you are in healthcare, engineering, or the arts, the ability to prioritize and make clear decisions is your most valuable asset. CasePath is written to be accessible and impactful for all disciplines.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-4" className="border border-slate-100 rounded-3xl px-8 bg-slate-50 data-[state=open]:bg-white data-[state=open]:shadow-lg transition-all">
-              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900">How specifically can I use this for case interviews?</AccordionTrigger>
-              <AccordionContent className="text-slate-600 text-lg leading-relaxed pb-8 pt-2 font-medium">
+            <AccordionItem value="item-4" className="border border-slate-100 dark:border-slate-800 rounded-3xl px-8 bg-slate-50 dark:bg-slate-900 data-[state=open]:bg-white dark:data-[state=open]:bg-slate-800 data-[state=open]:shadow-lg transition-all text-slate-900 dark:text-slate-200">
+              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900 dark:text-sky-50">How specifically can I use this for case interviews?</AccordionTrigger>
+              <AccordionContent className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed pb-8 pt-2 font-medium">
                 By reading how we deconstruct problems and build Issue Trees, you will naturally inherit a consultant&apos;s brain. You&apos;ll learn how to group data, form hypotheses, and present solutions top-down.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-5" className="border border-slate-100 rounded-3xl px-8 bg-slate-50 data-[state=open]:bg-white data-[state=open]:shadow-lg transition-all">
-              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900">Does CasePath provide the &quot;one right answer&quot;?</AccordionTrigger>
-              <AccordionContent className="text-slate-600 text-lg leading-relaxed pb-8 pt-2 font-medium">
+            <AccordionItem value="item-5" className="border border-slate-100 dark:border-slate-800 rounded-3xl px-8 bg-slate-50 dark:bg-slate-900 data-[state=open]:bg-white dark:data-[state=open]:bg-slate-800 data-[state=open]:shadow-lg transition-all text-slate-900 dark:text-slate-200">
+              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900 dark:text-sky-50">Does CasePath provide the &quot;one right answer&quot;?</AccordionTrigger>
+              <AccordionContent className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed pb-8 pt-2 font-medium">
                 In the real world, there is rarely one right answer. We focus on a &quot;rigorous, defensible process.&quot; We show you how to reach a decision that you can confidently justify to clients or leadership.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-6" className="border border-slate-100 rounded-3xl px-8 bg-slate-50 data-[state=open]:bg-white data-[state=open]:shadow-lg transition-all">
-              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900">Why choose a case-based approach?</AccordionTrigger>
-              <AccordionContent className="text-slate-600 text-lg leading-relaxed pb-8 pt-2 font-medium">
+            <AccordionItem value="item-6" className="border border-slate-100 dark:border-slate-800 rounded-3xl px-8 bg-slate-50 dark:bg-slate-900 data-[state=open]:bg-white dark:data-[state=open]:bg-slate-800 data-[state=open]:shadow-lg transition-all text-slate-900 dark:text-slate-200">
+              <AccordionTrigger className="text-left text-xl font-bold py-6 hover:no-underline text-slate-900 dark:text-sky-50">Why choose a case-based approach?</AccordionTrigger>
+              <AccordionContent className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed pb-8 pt-2 font-medium">
                 Case-based learning puts you in the driver&apos;s seat. It forces empathy with the decision-maker, making the lessons stick far longer than reading a list of abstract tips.
               </AccordionContent>
             </AccordionItem>

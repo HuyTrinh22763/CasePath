@@ -1,0 +1,87 @@
+<svg width="700" height="600" viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <!-- Background gradients for decorative rhombuses -->
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    
+    <!-- Rhombus clip path -->
+    <clipPath id="rhombusClip">
+      <path d="M 160 110 L 590 90 L 540 390 L 110 410 Z" />
+    </clipPath>
+    
+    <!-- Shadow filter -->
+    <filter id="innerShadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="700" height="600" fill="#f8fafc"/>
+  
+
+  <!-- Outer glow effect - white -->
+  <path
+    d="M 160 110 L 590 90 L 540 390 L 110 410 Z"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="20"
+    opacity="0.4"
+    filter="url(#blur)"
+  />
+
+  <!-- Background rhombus with premium white -->
+  <path
+    d="M 160 110 L 590 90 L 540 390 L 110 410 Z"
+    fill="#ffffff"
+  />
+
+  <!-- Embedded logos image -->
+  <!-- Embedded logos image -->
+  <image
+    href="/assets/Blog_1.jpg"
+    x="110"
+    y="90"
+    width="480"
+    height="320"
+    preserveAspectRatio="xMidYMid slice"
+    clip-path="url(#rhombusClip)"
+  />
+
+  <!-- Main border - premium white -->
+  <path
+    d="M 160 110 L 590 90 L 540 390 L 110 410 Z"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="12"
+    filter="url(#innerShadow)"
+  />
+
+  <!-- Inner subtle border for depth -->
+  <path
+    d="M 168 118 L 582 98 L 532 382 L 118 402 Z"
+    fill="none"
+    stroke="#f1f5f9"
+    stroke-width="1"
+    opacity="0.6"
+  />
+
+</svg>

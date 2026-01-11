@@ -1,52 +1,78 @@
 "use client"
 
 import React, { createContext, useContext, useState, useEffect } from "react"
+import { createClient } from "@/utils/supabase/client"
+import { User as SupabaseUser } from "@supabase/supabase-js"
 
-interface User {
+interface AppUser {
+  id: string
   name: string
   email: string
   image?: string
 }
 
 interface AuthContextType {
-  user: User | null
-  login: (email: string) => void
-  logout: () => void
+  user: AppUser | null
   isLoading: boolean
+  logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<AppUser | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const supabase = createClient()
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("casepath_user")
-    if (savedUser) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setUser(JSON.parse(savedUser))
+    const initializeAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession()
+        
+        if (session?.user) {
+          mapUser(session.user)
+        } else {
+          setUser(null)
+        }
+      } catch (error) {
+        console.error("Error checking auth session:", error)
+      } finally {
+        setIsLoading(false)
+      }
     }
-    setIsLoading(false)
+
+    initializeAuth()
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        mapUser(session.user)
+      } else {
+        setUser(null)
+      }
+      setIsLoading(false)
+    })
+
+    return () => {
+      subscription.unsubscribe()
+    }
   }, [])
 
-  const login = (email: string) => {
-    const mockUser: User = {
-      name: email.split("@")[0].charAt(0).toUpperCase() + email.split("@")[0].slice(1),
-      email,
-      image: "/assets/avatars/default.jpg"
-    }
-    setUser(mockUser)
-    localStorage.setItem("casepath_user", JSON.stringify(mockUser))
+  const mapUser = (sbUser: SupabaseUser) => {
+    setUser({
+      id: sbUser.id,
+      email: sbUser.email || "",
+      name: sbUser.user_metadata?.full_name || sbUser.email?.split("@")[0] || "User",
+      image: sbUser.user_metadata?.avatar_url
+    })
   }
 
-  const logout = () => {
+  const logout = async () => {
+    await supabase.auth.signOut()
     setUser(null)
-    localStorage.removeItem("casepath_user")
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, isLoading, logout }}>
       {children}
     </AuthContext.Provider>
   )

@@ -69,16 +69,15 @@ export function BlogList() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
       {/* Controls Header */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-6 rounded-2xl shadow-sm border" style={{ backgroundColor: '#ffffff', borderColor: '#E0E8EC' }}>
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-6 rounded-2xl shadow-sm border backdrop-blur-md transition-all hover:shadow-md bg-white/80 dark:bg-slate-900/80 border-slate-200 dark:border-slate-800">
         {/* Search */}
-        <div className="relative w-full md:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: '#506783' }} />
+        <div className="relative w-full md:w-96 group">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors group-hover:text-[#239E82] text-slate-500 dark:text-slate-400" />
           <Input 
             placeholder="Search blogs..." 
-            className="pl-10"
-            style={{ borderColor: '#E0E8EC', color: '#19304D' }}
+            className="pl-10 transition-all duration-300 focus:ring-2 focus:ring-[#239E82]/20 focus:border-[#239E82] border-slate-200 dark:border-slate-800 text-slate-900 dark:text-sky-50 dark:bg-slate-950"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value)
@@ -89,14 +88,14 @@ export function BlogList() {
 
         {/* Sort */}
         <div className="flex items-center gap-2">
-           <span className="text-sm hidden sm:inline font-medium" style={{ color: '#506783' }}>Sort by:</span>
+           <span className="text-sm hidden sm:inline font-medium text-slate-500 dark:text-slate-400">Sort by:</span>
            <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-[180px]" style={{ borderColor: '#E0E8EC', color: '#19304D' }}>
+            <SelectTrigger className="w-[180px] transition-all duration-300 focus:ring-2 focus:ring-[#239E82]/20 focus:border-[#239E82] hover:border-[#89A5B8] border-slate-200 dark:border-slate-800 text-slate-900 dark:text-sky-50 dark:bg-slate-950">
               <SelectValue placeholder="Sort order" />
             </SelectTrigger>
-            <SelectContent position="popper" sideOffset={4} style={{ backgroundColor: '#ffffff', borderColor: '#E0E8EC' }}>
-              <SelectItem value="newest">Newest First</SelectItem>
-              <SelectItem value="oldest">Oldest First</SelectItem>
+            <SelectContent position="popper" sideOffset={4} className="animate-in fade-in zoom-in-95 duration-200 bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800">
+              <SelectItem value="newest" className="cursor-pointer focus:bg-slate-100 dark:focus:bg-slate-800 focus:text-slate-900 dark:focus:text-sky-50">Newest First</SelectItem>
+              <SelectItem value="oldest" className="cursor-pointer focus:bg-slate-100 dark:focus:bg-slate-800 focus:text-slate-900 dark:focus:text-sky-50">Oldest First</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -113,12 +112,11 @@ export function BlogList() {
               setSelectedCategory(category)
               setCurrentPage(1)
             }}
-            className="rounded-full transition-all"
-            style={
+            className={`rounded-full transition-all duration-300 ease-out hover:scale-105 active:scale-95 ${
               selectedCategory === category 
-                ? { backgroundColor: '#19304D', color: 'white' }
-                : { borderColor: '#89A5B8', color: '#506783', backgroundColor: 'transparent' }
-            }
+                ? "bg-[#19304D] text-white shadow-lg shadow-[#19304D]/20 dark:bg-sky-500 dark:text-white dark:shadow-sky-500/20"
+                : "border-slate-300 text-slate-500 hover:text-slate-700 dark:border-slate-700 dark:text-slate-400 dark:hover:text-slate-300 bg-transparent"
+            }`}
           >
             {category}
           </Button>
@@ -126,7 +124,7 @@ export function BlogList() {
       </div>
 
       {/* Results Count */}
-      <div className="text-sm font-medium" style={{ color: '#506783' }}>
+      <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
         Showing {filteredPosts.length} results
       </div>
 
@@ -138,9 +136,9 @@ export function BlogList() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 rounded-lg border border-dashed" style={{ backgroundColor: '#E0E8EC', borderColor: '#89A5B8' }}>
-          <h3 className="text-lg font-bold" style={{ color: '#19304D' }}>No cases found</h3>
-          <p className="font-medium" style={{ color: '#506783' }}>Try adjusting your search or filters.</p>
+        <div className="text-center py-20 rounded-lg border border-dashed bg-slate-50 dark:bg-slate-900/50 border-slate-300 dark:border-slate-700">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-sky-50">No cases found</h3>
+          <p className="font-medium text-slate-500 dark:text-slate-400">Try adjusting your search or filters.</p>
         </div>
       )}
 
@@ -152,8 +150,7 @@ export function BlogList() {
               <PaginationPrevious 
                 href="#" 
                 onClick={(e) => { e.preventDefault(); handlePageChange(currentPage - 1) }}
-                className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
-                style={{ color: '#19304D' }}
+                className={currentPage === 1 ? "pointer-events-none opacity-50" : "text-slate-900 dark:text-sky-50 hover:bg-slate-100 dark:hover:bg-slate-800"}
               />
             </PaginationItem>
             
@@ -163,7 +160,9 @@ export function BlogList() {
                   href="#"
                   isActive={currentPage === i + 1}
                   onClick={(e) => { e.preventDefault(); handlePageChange(i + 1) }}
-                  style={currentPage === i + 1 ? { backgroundColor: '#19304D', color: 'white', borderColor: '#19304D' } : { color: '#506783' }}
+                  className={currentPage === i + 1 
+                    ? "bg-[#19304D] text-white hover:bg-[#19304D]/90 dark:bg-sky-500 dark:text-white dark:hover:bg-sky-600 border-transparent" 
+                    : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-sky-50 hover:bg-slate-100 dark:hover:bg-slate-800"}
                 >
                   {i + 1}
                 </PaginationLink>
@@ -174,8 +173,7 @@ export function BlogList() {
               <PaginationNext 
                 href="#"
                 onClick={(e) => { e.preventDefault(); handlePageChange(currentPage + 1) }}
-                className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
-                style={{ color: '#19304D' }}
+                className={currentPage === totalPages ? "pointer-events-none opacity-50" : "text-slate-900 dark:text-sky-50 hover:bg-slate-100 dark:hover:bg-slate-800"}
               />
             </PaginationItem>
           </PaginationContent>

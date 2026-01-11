@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useAuth } from "@/lib/contexts/AuthContext"
+import { createClient } from "@/utils/supabase/client"
 import { 
   Dialog, 
   DialogContent, 
@@ -13,70 +13,121 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { User, Lock, EyeOff, Mail } from "lucide-react"
-import { useGoogleLogin } from "@react-oauth/google"
+import { User, Lock, EyeOff, Eye, Loader2, AlertCircle } from "lucide-react"
 
 interface LoginModalProps {
   children: React.ReactNode
 }
 
 export function LoginModal({ children }: LoginModalProps) {
-  const { login } = useAuth()
-  const [email, setEmail] = useState("")
   const [isOpen, setIsOpen] = useState(false)
+  const [isSignUp, setIsSignUp] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [confirmationMsg, setConfirmationMsg] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const supabase = createClient()
+
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email) {
-      login(email)
-      setIsOpen(false)
+    setIsLoading(true)
+    setError(null)
+    setConfirmationMsg(null)
+
+    try {
+      if (isSignUp) {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: `${location.origin}/auth/callback`,
+            data: {
+              full_name: email.split("@")[0] // Default name from email
+            }
+          }
+        })
+        if (error) throw error
+        setConfirmationMsg("Check your email to confirm your account.")
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        })
+        if (error) throw error
+        setIsOpen(false)
+      }
+    } catch (err: any) {
+      setError(err.message || "An error occurred")
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      console.log("Google Login Success:", tokenResponse)
-      login("google_user@gmail.com")
-      setIsOpen(false)
-    },
-    onError: () => console.error("Google Login Failed"),
-  })
+  const handleGoogleLogin = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${location.origin}/auth/callback`
+        }
+      })
+      if (error) throw error
+    } catch (err: any) {
+      setError(err.message || "Failed to start Google Login")
+    }
+  }
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={(open) => {
+      setIsOpen(open)
+      if (!open) {
+        setError(null)
+        setConfirmationMsg(null)
+      }
+    }}>
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      {/* Opaque White Background, high z-index, centered */}
       <DialogContent className="sm:max-w-[420px] p-0 overflow-hidden border-none shadow-2xl bg-white dark:bg-slate-950 z-[101]">
         <div className="p-8 space-y-8">
-          {/* Header */}
-          {/* Header */}
           <DialogHeader className="text-center space-y-2">
-            <DialogTitle className="text-4xl font-extrabold tracking-tight text-primary">
-              Welcome Back
+            <DialogTitle className="text-3xl font-extrabold tracking-tight text-primary">
+              {isSignUp ? "Create Account" : "Welcome Back"}
             </DialogTitle>
             <DialogDescription className="text-muted-foreground">
-              Sign in to your CasePath account
+              {isSignUp ? "Join the CasePath community" : "Sign in to your CasePath account"}
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {error && (
+            <div className="p-3 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-300 text-sm rounded-lg flex items-center gap-2">
+              <AlertCircle className="h-4 w-4" />
+              {error}
+            </div>
+          )}
+
+          {confirmationMsg && (
+            <div className="p-3 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-300 text-sm rounded-lg">
+              {confirmationMsg}
+            </div>
+          )}
+
+          <form onSubmit={handleAuth} className="space-y-6">
             <div className="space-y-4">
-              {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="font-semibold text-primary">
-                  <span className="text-red-500 mr-1">*</span>Email
-                </Label>
+                <Label htmlFor="email">Email</Label>
                 <div className="relative group">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                     <User className="h-5 w-5" />
                   </div>
                   <Input 
                     id="email" 
                     type="email" 
-                    placeholder="Enter your email" 
+                    placeholder="name@example.com" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required 
@@ -85,27 +136,27 @@ export function LoginModal({ children }: LoginModalProps) {
                 </div>
               </div>
 
-              {/* Password Field */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="font-semibold text-primary">
-                  <span className="text-red-500 mr-1">*</span>Password
-                </Label>
+                <Label htmlFor="password">Password</Label>
                 <div className="relative group">
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                     <Lock className="h-5 w-5" />
                   </div>
                   <Input 
                     id="password" 
                     type={showPassword ? "text" : "password"} 
-                    placeholder="Enter your password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required 
                     className="h-12 pl-10 pr-10 border-border focus-visible:ring-primary/20"
                   />
                   <button 
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
                   >
-                    <EyeOff className="h-5 w-5" />
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
               </div>
@@ -113,13 +164,14 @@ export function LoginModal({ children }: LoginModalProps) {
 
             <Button 
               type="submit" 
-              className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
+              disabled={isLoading}
+              className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg rounded-xl shadow-lg transition-all active:scale-[0.98]"
             >
-              Sign In
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isSignUp ? "Sign Up" : "Sign In"}
             </Button>
           </form>
 
-          {/* Or Separator */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-border" />
@@ -129,14 +181,13 @@ export function LoginModal({ children }: LoginModalProps) {
             </div>
           </div>
 
-          {/* Google Login */}
           <Button 
             variant="outline" 
             type="button"
-            className="w-full h-12 border-2 border-border hover:bg-muted font-bold flex items-center justify-center gap-3 rounded-xl transition-all active:scale-[0.98]"
-            onClick={() => googleLogin()}
+            className="w-full h-12 border-2 border-border hover:bg-muted font-bold flex items-center justify-center gap-3 rounded-xl transition-all"
+            onClick={handleGoogleLogin}
           >
-            <svg viewBox="0 0 24 24" className="w-5 h-5">
+           <svg viewBox="0 0 24 24" className="w-5 h-5">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                 fill="#4285F4"
@@ -157,10 +208,18 @@ export function LoginModal({ children }: LoginModalProps) {
             <span className="text-primary">Continue with Google</span>
           </Button>
 
-          <p className="text-center text-sm text-muted-foreground p-2">
-            Don&apos;t have an account?{" "}
-            <Button variant="link" className="p-0 h-auto font-bold text-secondary hover:text-secondary/80">
-              Sign up here
+          <p className="text-center text-sm text-muted-foreground">
+            {isSignUp ? "Already have an account? " : "Don't have an account? "}
+            <Button 
+              variant="link" 
+              className="p-0 h-auto font-bold text-secondary hover:text-secondary/80"
+              onClick={() => {
+                setIsSignUp(!isSignUp)
+                setError(null)
+                setConfirmationMsg(null)
+              }}
+            >
+              {isSignUp ? "Sign in" : "Sign up here"}
             </Button>
           </p>
         </div>

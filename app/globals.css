@@ -49,8 +49,8 @@
 @layer base {
   :root {
     /* Option A — Sky + Navy */
-    /* Background: #F3F8FF */
-    --background: 215 67% 98%;
+    /* Background: #FCFDFD */
+    --background: 210 20% 99%;
     /* Text: #0B1B2B */
     --foreground: 210 59% 11%;
 
@@ -146,5 +146,46 @@
   .animate-gradient {
     background-size: 200% 200%;
     animation: gradient-shift 8s linear infinite;
+  }
+
+  @keyframes draw-in {
+    0% { width: 0; opacity: 0; }
+    100% { width: 100%; opacity: 0.3; }
+  }
+  @keyframes breath {
+    0%, 100% { opacity: 0.3; transform: scaleX(1); }
+    50% { opacity: 0.5; transform: scaleX(1.05); }
+  }
+  .animate-underline-sequence {
+    animation: draw-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards, breath 5s ease-in-out infinite 0.9s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+  .animate-sparkle {
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  @keyframes liquid-blob {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(30px, -50px) scale(1.1) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) scale(0.9) rotate(240deg); }
+    100% { transform: translate(0, 0) scale(1) rotate(360deg); }
+  }
+  .animate-liquid {
+    animation: liquid-blob 20s infinite linear;
+  }
+  .animate-liquid-slow {
+    animation: liquid-blob 25s infinite linear reverse;
   }
 }
